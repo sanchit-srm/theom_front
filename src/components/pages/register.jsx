@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import Breadcrumb from "../common/breadcrumb";
 import SweetAlert from 'react-bootstrap-sweetalert';
+import {apiUrl} from '../../constants/static.js'
 
 
 class Register extends Component {
@@ -44,10 +45,11 @@ class Register extends Component {
             formIsValid = false;
             errors["password"] = "Passowrd Cannot be blank";
         }
-        // if(!fields["confirm_password"]){
-        //     formIsValid = false;
-        //     errors["confirm_password"] = "Passowrd Cannot be blank";
-        // }
+
+        if(fields["password"]!==fields["confirm_password"]){
+            formIsValid = false;
+            errors["confirm_password"] = "Password not match";
+        }
 
         //Email
         if(!fields["email"]){
@@ -64,7 +66,6 @@ class Register extends Component {
               errors["email"] = "Email is not valid";
             }
         }  
-        console.log(errors)
 
        this.setState({errors: errors});
        return formIsValid;
@@ -73,7 +74,9 @@ class Register extends Component {
    formSubmit = (e) => {
         e.preventDefault();
         if(this.handleValidation()){
-           axios.post(`http://localhost:5000/auth/register`, this.state.fields)
+            let fields = this.state.fields
+            fields.type = "user";
+           axios.post(apiUrl +`/auth/register`, this.state.fields)
                 .then(res => {
                     let alert = 
                     <SweetAlert
@@ -94,7 +97,7 @@ class Register extends Component {
                         title=""
                         onConfirm={() => this.hideAlert()}
                     >
-                        User already exists.
+                        {error.response.data.msg}
                     </SweetAlert>
                     this.setState({alert:alert})
                 });
@@ -113,7 +116,6 @@ class Register extends Component {
 
     handleChange = (e, field) => {         
         let fields = this.state.fields;
-        console.log(fields)
         fields[field] = e.target.value;        
         this.setState({fields});
     }
@@ -143,7 +145,7 @@ class Register extends Component {
                                             </div>
                                             <div className="col-md-6">
                                                 <label htmlFor="review">Last Name</label>
-                                                <input type="password" className="form-control" id="lname"
+                                                <input type="text" className="form-control" id="lname"
                                                        placeholder="Last Name" required="" onChange={(e) => this.handleChange(e, "lname")}/>
                                                 <span style={{color: "red"}}>{this.state.errors["lname"]}</span>
                                             </div>

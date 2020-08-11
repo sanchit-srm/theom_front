@@ -128,3 +128,14 @@ export const changeCurrency = (symbol) => ({
     symbol
 });
 
+
+export const login = (user) => ({
+    type: types.LOGIN,
+    user
+});
+
+export const logout = () => ({
+    type: types.LOGOUT,
+    user : {}
+});
+

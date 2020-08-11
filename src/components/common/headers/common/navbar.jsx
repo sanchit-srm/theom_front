@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import { withTranslate } from 'react-redux-multilingual'
+import { Link, withRouter } from 'react-router-dom';
+import { connect } from 'react-redux'
+import { compose } from 'redux'
+import {logout} from '../../../../actions'
 
 class NavBar extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            navClose: { right: '0px' }
+            navClose: { right: '0px' },
+            update:false
         }
     }
 
@@ -63,7 +66,16 @@ class NavBar extends Component {
         }
     }
 
+    logout = () => {
+        this.props.logout()
+        this.setState({update:true})
+        localStorage.removeItem('user');
+        this.props.history.push('/pages/login')
+        
+    }
+
     render() {
+        const users = (this.props.user)
         const { translate } = this.props;
         return (
             <div>
@@ -89,16 +101,34 @@ class NavBar extends Component {
                                     {'Contact Us'}
                                 </Link>
                             </li>
-                            <li>
-                                <Link to={`${process.env.PUBLIC_URL}/pages/login`} className="nav-link">
-                                    {'Login'}
-                                </Link>
-                            </li>
-                            <li>
-                                <Link to={`${process.env.PUBLIC_URL}/pages/login`} className="nav-link">
-                                    <button type="button" className="btn btn-solid">Join as a professional</button>
-                                </Link>
-                            </li>
+                            {Object.keys(users).length!==0?(
+                                <>
+                                <li>
+                                    <Link to={`${process.env.PUBLIC_URL}/pages/dashboard`} className="nav-link">
+                                        {'My Account'}
+                                    </Link>
+                                </li>
+                                <li>
+                                    <button type="button" className="btn btn-solid" onClick={this.logout}>Logout</button>
+                                </li>
+                                </>
+                                ):
+                                (
+                                <>
+                                    <li>
+                                        <Link to={`${process.env.PUBLIC_URL}/pages/login`} className="nav-link">
+                                            {'Login'}
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        
+                                        <Link to={`${process.env.PUBLIC_URL}/pages/providerlogin`} className="nav-link">
+                                            <button type="button" className="btn btn-solid">Join as a professional</button>
+                                        </Link>
+                                    </li>
+                                </>
+                                )
+                            }
                         </ul>
                     </div>
                 </div>
@@ -107,5 +137,11 @@ class NavBar extends Component {
     }
 }
 
+const mapStateToProps = (state) => ({
+    user: state.user,
+})
 
-export default withTranslate(NavBar);
+export default compose(withRouter, connect(
+    mapStateToProps , {logout}
+)) (NavBar)
+// export default withRouter(NavBar);

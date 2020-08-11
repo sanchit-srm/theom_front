@@ -5,6 +5,7 @@ import Slider from 'react-slick';
 import {Link} from 'react-router-dom';
 import Modal from 'react-responsive-modal';
 import ThemeSettings from "../../common/theme-settings"
+import {Slider4} from '../../../services/script'
 
 // Import custom components
 import {
@@ -37,10 +38,15 @@ class Beauty extends Component {
     };
 
     componentDidMount() {
-        document.getElementById("color").setAttribute("href", `${process.env.PUBLIC_URL}/assets/css/color3.css` );
+        document.getElementById("color").setAttribute("href", `${process.env.PUBLIC_URL}/assets/css/color7.css` );
     }
 
     render(){
+
+        var settings = {
+            infinite: true,
+            slidesToShow: 4,
+          };
 
         return (
             <div>
@@ -71,6 +77,60 @@ class Beauty extends Component {
                 <section className="beauty-about">
                     <div className="container">
                         <div className="row">
+                        <Slider {...Slider4} className="slide-4 category-m no-arrow">
+                            <div>
+                                <div className="category-wrapper">
+                                        <div>
+                                            <img src={`${process.env.PUBLIC_URL}/assets/images/home-banner/home-&-garden.png`}
+                                                    className="img-fluid blur-up lazyload bg-img" alt="" />
+                                        </div>
+                                        <h4>Home & Garden</h4>
+                                </div>
+                            </div>
+                            <div>
+                                <div className="category-wrapper">
+                                        <div>
+                                            <img src={`${process.env.PUBLIC_URL}/assets/images/home-banner/Helth-&-wellbeing.png`}
+                                                    className="img-fluid blur-up lazyload bg-img" alt="" />
+                                        </div>
+                                        <h4>Health & Wellbeing</h4>
+                                </div>
+                            </div>
+                            <div>
+                                <div className="category-wrapper">
+                                        <div>
+                                            <img src={`${process.env.PUBLIC_URL}/assets/images/home-banner/wedding-&-events.png`}
+                                                    className="img-fluid blur-up lazyload bg-img" alt="" />
+                                        </div>
+                                        <h4>Wedding & Events</h4>
+                                </div>
+                            </div>
+                            <div>
+                                <div className="category-wrapper">
+                                        <div>
+                                            <img src={`${process.env.PUBLIC_URL}/assets/images/home-banner/Business-services.png`}
+                                                    className="img-fluid blur-up lazyload bg-img" alt="" />
+                                        </div>
+                                        <h4>Business Services</h4>
+                                </div>
+                            </div>
+                            <div>
+                                <div className="category-wrapper">
+                                        <div>
+                                            <img src={`${process.env.PUBLIC_URL}/assets/images/home-banner/Lessons-&-training.png`}
+                                                    className="img-fluid blur-up lazyload bg-img" alt="" />
+                                        </div>
+                                        <h4>Lession & Training</h4>
+                                </div>
+                            </div>
+                        </Slider>
+                        </div>
+                    </div>
+                </section>
+
+                <section className="beauty-about">
+                    <div className="container">
+                        <div className="row">
                             <div className="col-xl-5 col-lg-6 col-md-12 offset-xl-1 text-center">
                                 <img src={`${process.env.PUBLIC_URL}/assets/images/beauty/about-us.jpg`} alt="" className="img-fluid blur-up lazyload" />
                             </div>
@@ -83,22 +143,6 @@ class Beauty extends Component {
                                                 accusantium doloremque laudantium, totam rem aperiam.sit voluptatem
                                                 accusantium doloremque laudantium,totam rem aperiam.</p>
                                         </div>
-                                        <div className="service small-section pb-0">
-                                            <div className="row">
-                                                <div className="col-sm-4 service-block1">
-                                                    <div dangerouslySetInnerHTML={{ __html: svgFreeShipping }} />
-                                                    <h5>free shipping</h5>
-                                                </div>
-                                                <div className="col-sm-4 service-block1">
-                                                    <div dangerouslySetInnerHTML={{ __html: svgservice }} />
-                                                    <h5>24 X 7 service</h5>
-                                                </div>
-                                                <div className="col-sm-4 service-block1">
-                                                    <div dangerouslySetInnerHTML={{ __html: svgoffer }} />
-                                                    <h5>festival offer</h5>
-                                                </div>
-                                            </div>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -106,6 +150,87 @@ class Beauty extends Component {
                     </div>
                 </section>
                 {/*About Section End*/}
+
+
+                <section className="section-b-space ratio_portrait">
+                    <div className="container">
+                        <div className="row">
+                            <div className="col">
+                                <Slider {...Slider4} className="slide-4 category-m no-arrow">
+                                    <div>
+                                        <div className="category-wrapper">
+                                            <div>
+                                                <div>
+                                                    <img src={`${process.env.PUBLIC_URL}/assets/images/home-banner/service1.png`}
+                                                         className="img-fluid blur-up lazyload bg-img" alt="" />
+                                                </div>
+                                                <h4>House Cleaning</h4>
+                                                <ul className="category-link">
+                                                    <li><a href="#">d1 milano</a></li>
+                                                    <li><a href="#">damaskeening</a></li>
+                                                    <li><a href="#">diving watch</a></li>
+                                                    <li><a href="#">dollar watch</a></li>
+                                                </ul>
+                                                <a href="#" className="btn btn-outline">Read More</a></div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div className="category-wrapper">
+                                            <div>
+                                                <div>
+                                                    <img src={`${process.env.PUBLIC_URL}/assets/images/home-banner/service2.png`}
+                                                         className="img-fluid blur-up lazyload bg-img" alt="" />
+                                                </div>
+                                                <h4>Personal Training</h4>
+                                                <ul className="category-link">
+                                                    <li><a href="#">Shock-resistant watch</a></li>
+                                                    <li><a href="#">Skeleton watch</a></li>
+                                                    <li><a href="#">Slow watch</a></li>
+                                                    <li><a href="#">Solar-powered watch</a></li>
+                                                </ul>
+                                                <a href="#" className="btn btn-outline">Read More</a></div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div className="category-wrapper">
+                                            <div>
+                                                <div>
+                                                    <img src={`${process.env.PUBLIC_URL}/assets/images/home-banner/service3.png`}
+                                                         className="img-fluid blur-up lazyload bg-img" alt="" />
+                                                </div>
+                                                <h4>Wedding Photography</h4>
+                                                <ul className="category-link">
+                                                    <li><a href="#">Watchmaking conglomerates</a></li>
+                                                    <li><a href="#">Breitling SA</a></li>
+                                                    <li><a href="#">Casio watches</a></li>
+                                                    <li><a href="#">Citizen Watch</a></li>
+                                                </ul>
+                                                <a href="#" className="btn btn-outline">Read More</a></div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div className="category-wrapper">
+                                            <div>
+                                                <div>
+                                                    <img src={`${process.env.PUBLIC_URL}/assets/images/home-banner/service4.png`}
+                                                         className="img-fluid blur-up lazyload bg-img" alt="" />
+                                                </div>
+                                                <h4>Web Design</h4>
+                                                <ul className="category-link">
+                                                    <li><a href="#">Manufacture d'horlogerie</a></li>
+                                                    <li><a href="#">Mechanical watch</a></li>
+                                                    <li><a href="#">Microbrand watches</a></li>
+                                                    <li><a href="#">MIL-W-46374</a></li>
+                                                </ul>
+                                                <a href="#" className="btn btn-outline">Read More</a></div>
+                                        </div>
+                                    </div>
+                                </Slider>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
 
                 {/*Product slider*/}
                 {/* <TopCollection type={'beauty'} /> */}
@@ -143,7 +268,7 @@ class Beauty extends Component {
                 {/*Video Section End*/}
 
                 {/*Product slider*/}
-                <TopCollection type={'beauty'} />
+                {/* <TopCollection type={'beauty'} /> */}
                 {/*Product slider End*/}
 
                 {/*Blog Section*/}

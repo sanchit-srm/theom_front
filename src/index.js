@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { ScrollContext } from 'react-router-scroll-4';
 import { IntlReducer as Intl, IntlProvider } from 'react-redux-multilingual'
+import PrivateRoute from './components/PrivateRoute'
 import './index.scss';
 
 // Import custom components
@@ -56,7 +57,9 @@ import aboutUs from './components/pages/about-us'
 import PageNotFound from './components/pages/404'
 import lookbook from './components/pages/lookbook'
 import Login from './components/pages/login'
+import Providerlogin from './components/pages/providerlogin'
 import Register from './components/pages/register'
+import Provideregister from './components/pages/providerregister'
 import Search from './components/pages/search'
 import Collection from './components/pages/collection'
 import ForgetPassword from './components/pages/forget-password'
@@ -101,13 +104,13 @@ class Root extends React.Component {
 					<ScrollContext>
 						<Switch>
                             <Route exact path={`${process.env.PUBLIC_URL}/`} component={Beauty}/>
-                            {/* <Route path={`${process.env.PUBLIC_URL}/vegetables`} component={Vegetables}/>
+                            <Route path={`${process.env.PUBLIC_URL}/vegetables`} component={Vegetables}/>
 							<Route path={`${process.env.PUBLIC_URL}/electronic`} component={Electronic}/>
                             <Route path={`${process.env.PUBLIC_URL}/furniture`} component={Furniture}/>
 							<Route path={`${process.env.PUBLIC_URL}/pets`} component={Pets}/>
 							<Route path={`${process.env.PUBLIC_URL}/watch`} component={Watch}/>
                             <Route path={`${process.env.PUBLIC_URL}/kids`} component={Kids}/>
-                            <Route path={`${process.env.PUBLIC_URL}/beauty`} component={Beauty}/> */}
+                            <Route path={`${process.env.PUBLIC_URL}/beauty`} component={Beauty}/>
                             <Layout>
 
                                 {/*Routes For Layouts*/}
@@ -147,12 +150,13 @@ class Root extends React.Component {
                                 <Route path={`${process.env.PUBLIC_URL}/pages/404`} component={PageNotFound}/>
                                 <Route path={`${process.env.PUBLIC_URL}/pages/lookbook`} component={lookbook}/>
                                 <Route path={`${process.env.PUBLIC_URL}/pages/login`} component={Login}/>
+                                <Route path={`${process.env.PUBLIC_URL}/pages/providerlogin`} component={Providerlogin}/>
                                 <Route path={`${process.env.PUBLIC_URL}/pages/register`} component={Register}/>
+                                <Route path={`${process.env.PUBLIC_URL}/pages/providerregister`} component={Provideregister}/>
                                 <Route path={`${process.env.PUBLIC_URL}/pages/search`} component={Search}/>
                                 <Route path={`${process.env.PUBLIC_URL}/pages/collection`} component={Collection}/>
                                 <Route path={`${process.env.PUBLIC_URL}/pages/forget-password`} component={ForgetPassword}/>
                                 <Route path={`${process.env.PUBLIC_URL}/pages/contact`} component={Contact}/>
-                                <Route path={`${process.env.PUBLIC_URL}/pages/dashboard`} component={Dashboard}/>
                                 <Route path={`${process.env.PUBLIC_URL}/pages/faq`} component={Faq}/>
 
 								{/*Features*/}
@@ -179,6 +183,10 @@ class Root extends React.Component {
                                 <Route path={`${process.env.PUBLIC_URL}/blog/right-sidebar`} component={RightSide}/>
                                 <Route path={`${process.env.PUBLIC_URL}/blog/details`} component={Details}/>
                                 <Route path={`${process.env.PUBLIC_URL}/blog/blog-page`} component={BlogPage}/>
+                                <PrivateRoute>
+                                    <Route path={`${process.env.PUBLIC_URL}/pages/dashboard`} component={Dashboard}/>
+                                </PrivateRoute>
+                                
 
                                 {/* <Route exact path="*" component={PageNotFound} /> */}
                             </Layout>

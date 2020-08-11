@@ -1,6 +1,11 @@
 import React, {Component} from 'react';
 import Breadcrumb from "../common/breadcrumb";
+import { connect } from 'react-redux'
+import { compose } from 'redux'
 
+import {Link, BrowserRouter, Route, withRouter} from 'react-router-dom';
+import Mydashboard from './customer/mydashboard';
+import Editprofile from './customer/editprofile'
 class Dashboard extends Component {
 
     constructor (props) {
@@ -8,8 +13,8 @@ class Dashboard extends Component {
     }
 
     render (){
-
-
+        const users = (this.props.user.user)
+        console.log(users)
         return (
             <div>
                 <Breadcrumb title={'Dashboard'}/>
@@ -32,22 +37,68 @@ class Dashboard extends Component {
                                     </span>
                                     </div>
                                     <div className="block-content">
-                                        <ul>
-                                            <li className="active"><a href='#'>Account Info</a></li>
-                                            <li><a href="#">Address Book</a></li>
-                                            <li><a href="#">My Orders</a></li>
-                                            <li><a href="#">My Wishlist</a></li>
-                                            <li><a href="#">Newsletter</a></li>
-                                            <li><a href="#">My Account</a></li>
-                                            <li><a href="#">Change Password</a></li>
-                                            <li className="last"><a href="#">Log Out</a></li>
-                                        </ul>
+                                        
+                                            {users.type==="seller"?(
+                                                <ul>
+                                                <li>
+                                                    <Link to={`${process.env.PUBLIC_URL}/pages/dashboard`} className="nav-link">
+                                                        {'Dashboard'}
+                                                    </Link>
+                                                </li>
+                                                <li>
+                                                    <Link to={`${process.env.PUBLIC_URL}/pages/dashboard/editprofile`} className="nav-link">
+                                                        {'Edit Profile'}
+                                                    </Link>
+                                                </li>
+                                                <li>
+                                                    <Link to={`${process.env.PUBLIC_URL}/pages/dashboard/services`} className="nav-link">
+                                                        {'My Services'}
+                                                    </Link>
+                                                </li>
+                                                <li>
+                                                    <Link to={`${process.env.PUBLIC_URL}/pages/dashboard/addservice`} className="nav-link">
+                                                        {'Add new service'}
+                                                    </Link>
+                                                </li>
+                                                <li>
+                                                    <Link to={`${process.env.PUBLIC_URL}/pages/dashboard/orders`} className="nav-link">
+                                                        {'Orders'}
+                                                    </Link>
+                                                </li>
+                                            </ul>
+                                            ):(
+                                                <ul>
+                                                    <li>
+                                                        <Link to={`${process.env.PUBLIC_URL}/pages/dashboard`} className="nav-link">
+                                                            {'Dashboard'}
+                                                        </Link>
+                                                    </li>
+                                                    <li>
+                                                        <Link to={`${process.env.PUBLIC_URL}/pages/dashboard/editprofile`} className="nav-link">
+                                                            {'Edit Profile'}
+                                                        </Link>
+                                                    </li>
+                                                    <li>
+                                                        <Link to={`${process.env.PUBLIC_URL}/pages/dashboard/address`} className="nav-link">
+                                                            {'My Address'}
+                                                        </Link>
+                                                    </li>
+                                                    <li>
+                                                        <Link to={`${process.env.PUBLIC_URL}/pages/dashboard/orders`} className="nav-link">
+                                                            {'My Orders'}
+                                                        </Link>
+                                                    </li>
+                                                </ul>
+                                            )}
+                                            
                                     </div>
                                 </div>
                             </div>
                             <div className="col-lg-9">
                                 <div className="dashboard-right">
-                                    <div className="dashboard">
+                                    <Route path={this.props.match.path} exact component={Mydashboard}/>
+                                    <Route path={`${this.props.match.path}/editprofile`} component={Editprofile}/>
+                                    {/* <div className="dashboard">
                                         <div className="page-title">
                                             <h2>My Dashboard</h2>
                                         </div>
@@ -114,7 +165,7 @@ class Dashboard extends Component {
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> */}
                                 </div>
                             </div>
                         </div>
@@ -126,4 +177,10 @@ class Dashboard extends Component {
     }
 }
 
-export default Dashboard
+const mapStateToProps = (state) => ({
+    user: state.user,
+})
+
+export default compose(withRouter, connect(
+    mapStateToProps , null
+)) (Dashboard)
